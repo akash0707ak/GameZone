@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10152b">
+<meta name="description" content="GameZone — four interactive mini experiences to cook, explore space, learn football rules, and discover famous libraries.">
+<title>GameZone — Play, Explore, Learn</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#151d33;--panel2:#1c2741;--text:#f3f6ff;--muted:#aebbd4;--line:#34415e;--lime:#c6f36b;--blue:#86b8ff;--red:#ff8585;--green:#78e0a1}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172343 0%,var(--bg) 58%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+.wrap{width:min(1100px,calc(100% - 32px));margin:auto;padding:34px 0 54px}.eyebrow{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);font-weight:800}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;flex-wrap:wrap;margin-bottom:24px}h1{font-size:clamp(2.6rem,8vw,4.5rem);line-height:1.02;letter-spacing:-.06em;margin:8px 0}header p{color:var(--muted);margin:10px 0 0}.logo{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:14px;background:var(--lime);color:#18220a;font-size:1.5rem;margin-right:8px}
+.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0}.tab,button{font:inherit;font-weight:750;border:1px solid var(--line);border-radius:12px;padding:10px 15px;background:var(--panel2);color:var(--text);cursor:pointer;transition:transform .15s,border-color .15s,background .15s}.tab:hover,button:hover{transform:translateY(-1px);border-color:var(--lime)}.tab[aria-selected=true],button.primary{background:var(--lime);border-color:var(--lime);color:#16200a}.tab:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.panel{background:linear-gradient(140deg,rgba(27,38,65,.97),rgba(16,23,42,.98));border:1px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,30px);box-shadow:0 22px 60px #0003}.panel h2{font-size:clamp(1.55rem,4vw,2rem);letter-spacing:-.035em;line-height:1.15;margin:0 0 8px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.visual{border-radius:18px;min-height:260px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(145deg,#422a22,#153c34);padding:20px}.bowl{font-size:7rem;filter:drop-shadow(0 16px 10px #0005)}.ingredients{display:grid;gap:8px;margin:16px 0}.ingredient{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#0b1222}.ingredient input{accent-color:var(--lime);width:18px;height:18px}.ingredient span:first-of-type{flex:1}.qty{color:var(--muted);font-size:.9rem}.steps{padding-left:22px;color:#dce4f5}.steps li{padding:4px 0 4px 4px}.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.stat{font-size:.9rem;color:var(--muted)}.spacebox{background:#080d20;border-radius:18px;padding:12px;margin:20px 0}.spacebox svg{display:block;width:100%;height:auto;max-height:260px}.stage-list{display:flex;flex-wrap:wrap;gap:8px}.stage-list button{font-size:.9rem;padding:8px 11px}.factbox{margin-top:18px;border:1px solid var(--line);border-radius:15px;padding:18px}.field{background:#0b1222;border-radius:18px;padding:8px}.field svg{width:100%;display:block}.range{width:100%;accent-color:var(--lime);margin:15px 0}.result{border-radius:14px;padding:14px 16px;margin-top:12px;background:#12362b;border:1px solid #27664f}.result.bad{background:#3a2028;border-color:#8b3f4a}.library-img{min-height:300px;border-radius:18px;display:grid;place-items:center;font-size:6rem;background:linear-gradient(135deg,#3b2d58,#1b5c64);text-align:center}.library-img small{display:block;font-size:.9rem;letter-spacing:.1em;color:#dce7ff}.fact{border:1px solid var(--line);padding:13px;border-radius:12px;margin:9px 0;background:#10182a}.foot{color:var(--muted);font-size:.85rem;text-align:center;margin-top:26px}
+[hidden]{display:none!important}@media(max-width:720px){.grid{grid-template-columns:1fr}.visual{min-height:190px}.library-img{min-height:220px}.wrap{padding-top:24px}}@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><div><div class="eyebrow"><span class="logo" aria-hidden="true">✦</span> Your interactive playground</div><h1>GameZone</h1><p>Four little worlds to cook, explore, learn and play.</p></div><div class="eyebrow">PLAY • DISCOVER • REPEAT</div></header>
+<nav class="tabs" role="tablist" aria-label="Choose a game">
+<button class="tab" role="tab" id="tab-cooking" aria-controls="game-cooking" aria-selected="true" data-game="cooking">🍝 Cook</button>
+<button class="tab" role="tab" id="tab-space" aria-controls="game-space" aria-selected="false" data-game="space">🌌 Space</button>
+<button class="tab" role="tab" id="tab-offside" aria-controls="game-offside" aria-selected="false" data-game="offside">⚽ Offside</button>
+<button class="tab" role="tab" id="tab-libraries" aria-controls="game-libraries" aria-selected="false" data-game="libraries">📚 Libraries</button>
+</nav>
+<section class="panel" id="game-cooking" role="tabpanel" aria-labelledby="tab-cooking">
+<div class="grid"><div><div class="visual"><div class="bowl" aria-hidden="true">🍝</div></div><p class="muted">QUICK DINNER · ABOUT 20 MIN</p><h2>Lemon & spinach pasta</h2><p class="muted">Fresh, bright, comforting. Tick ingredients as you collect them.</p><p class="muted">Tip: save a little pasta water to make the sauce silky.</p></div>
+<div><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><h2>Ingredients</h2><div class="controls" style="margin:0"><button class="serving primary" data-serving="2" aria-pressed="true">2 servings</button><button class="serving" data-serving="4" aria-pressed="false">4 servings</button></div></div>
+<div class="ingredients" id="ingredients"></div><p class="stat" id="checked-count" aria-live="polite">0 of 6 ingredients checked</p>
+<h2 style="margin-top:25px">Four easy steps</h2><ol class="steps"><li>Boil pasta in salted water; reserve a mug of pasta water.</li><li>Warm olive oil and gently cook the garlic for 30 seconds.</li><li>Add spinach until wilted, then toss with lemon zest and juice.</li><li>Mix in pasta and a splash of pasta water. Finish with Parmesan if you like.</li></ol></div></div>
+</section>
+<section class="panel" id="game-space" role="tabpanel" aria-labelledby="tab-space" hidden>
+<h2>The life of a Sun-like star</h2><p class="muted">Choose a stage to see what changes over a star’s lifetime.</p>
+<div class="spacebox"><svg id="star-svg" viewBox="0 0 560 220" role="img" aria-label="Illustration of a star stage"><defs><radialGradient id="glow"><stop offset="0%" stop-color="#ffcc72" stop-opacity=".95"/><stop offset="100%" stop-color="#ffcc72" stop-opacity="0"/></radialGradient></defs><g id="stars"></g><circle id="star-halo" cx="280" cy="94" r="70" fill="url(#glow)"/><circle id="star-core" cx="280" cy="94" r="29" fill="#ffcc72"/><g id="nebula" fill="#8b7cf6" opacity=".65" hidden><ellipse cx="250" cy="78" rx="34" ry="16"/><ellipse cx="304" cy="108" rx="39" ry="19"/></g><circle id="red-ring" cx="280" cy="94" r="48" fill="none" stroke="#ff835d" stroke-width="5" opacity=".5" hidden/><text id="star-label" x="280" y="185" text-anchor="middle" fill="#e9edff" font-size="15">Main sequence</text></svg></div>
+<div class="stage-list" id="stage-list"></div><div class="factbox"><h2 id="stage-title">3. Main sequence</h2><p class="muted" id="stage-detail">When hydrogen fusion begins in the core, outward pressure balances gravity. A Sun-like star spends most of its life in this steady stage.</p><div class="controls"><button id="prev-stage">← Previous stage</button><button class="primary" id="next-stage">Next stage →</button></div></div>
+</section>
+<section class="panel" id="game-offside" role="tabpanel" aria-labelledby="tab-offside" hidden>
+<h2>Offside explained</h2><p class="muted">Freeze the moment the pass is played. Move only the receiver.</p>
+<div class="field"><svg viewBox="0 0 320 180" role="img" aria-label="Football pitch with ball, defender, and movable receiver"><rect width="320" height="180" rx="8" fill="#176447"/><rect x="8" y="8" width="304" height="164" fill="none" stroke="#d8f0df" stroke-width="1.4"/><path d="M160 8V172M8 90H312M222 44H312V136H222Z M8 60H42V120H8Z" fill="none" stroke="#d8f0df" stroke-width="1.2"/><path d="M210 10V170" stroke="#f7d66d" stroke-dasharray="5 4" stroke-width="1.5"/><rect x="300" y="68" width="12" height="44" fill="none" stroke="#fff" stroke-width="2"/><circle cx="142" cy="85" r="6" fill="#fff" stroke="#111827" stroke-width="1.5"/><circle cx="210" cy="85" r="8" fill="#ef6262" stroke="#fff" stroke-width="1.5"/><path id="pass-line" d="M142 85L205 112" stroke="#f8f1c4" stroke-width="1.5" stroke-dasharray="4 4"/><circle id="receiver" cx="205" cy="112" r="8" fill="#62a7ff" stroke="#fff" stroke-width="1.5"/><g fill="#fff" font-size="8"><text x="126" y="70">BALL</text><text x="190" y="69">DEFENDER</text><text id="receiver-label" x="216" y="129">RECEIVER</text><text x="251" y="35">GOAL</text></g></svg></div>
+<div class="controls" style="justify-content:space-between"><label for="receiver-position">Receiver position</label><button id="level-button">Set level with defender</button></div><input class="range" id="receiver-position" type="range" min="145" max="270" value="205" aria-label="Move receiver toward or away from the goal"><div class="stat" style="display:flex;justify-content:space-between"><span>Further from goal</span><span>Closer to goal</span></div>
+<div id="offside-result" class="result" aria-live="polite"><h2 id="offside-title">Onside</h2><p id="offside-copy" style="margin-bottom:0">The receiver is level with or behind the second-last defender, so this position is onside.</p></div><p class="muted">Being in an offside position alone is not an offence. The ball and second-last defender stay fixed while you move the receiver.</p>
+</section>
+<section class="panel" id="game-libraries" role="tabpanel" aria-labelledby="tab-libraries" hidden>
+<div class="grid"><div><div class="library-img" id="library-art" aria-hidden="true">📚<small>LIBRARY EXPLORER</small></div><p class="stat" id="library-count">LIBRARY 1 OF 6</p></div><div><p class="eyebrow">Travel through books</p><h2 id="library-name">Trinity College Library</h2><p class="muted" id="library-place">Dublin, Ireland</p><h2 style="margin-top:20px">Two surprising facts</h2><div id="library-facts"></div><div class="controls"><button id="prev-library">← Previous</button><button class="primary" id="next-library">Next library →</button></div></div></div>
+</section>
+<p class="foot">Made for curious minds ✨ · GameZone is a small educational playground.</p>
+</main>
+<script>
+(() => {
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+// Game navigation
+$$('.tab').forEach(btn => btn.addEventListener('click', () => {
+  $$('.tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+  ['cooking','space','offside','libraries'].forEach(id => $('#game-'+id).hidden = id !== btn.dataset.game);
+}));
+// Cooking checklist
+const ingredientData = [
+  {id:'pasta',name:'Pasta',qty2:'180 g',qty4:'360 g'},
+  {id:'spinach',name:'Fresh spinach',qty2:'2 handfuls',qty4:'4 handfuls'},
+  {id:'lemon',name:'Lemon',qty2:'1',qty4:'2'},
+  {id:'garlic',name:'Garlic cloves',qty2:'2',qty4:'4'},
+  {id:'parmesan',name:'Parmesan (optional)',qty2:'30 g',qty4:'60 g'},
+  {id:'oil',name:'Olive oil',qty2:'1 tbsp',qty4:'2 tbsp'}
+];
+let servings = 2;
+function renderIngredients(){
+  $('#ingredients').innerHTML = ingredientData.map(x => `<label class="ingredient"><input type="checkbox" data-id="${x.id}"><span>${x.name}</span><span class="qty">${servings===2?x.qty2:x.qty4}</span></label>`).join('');
+  $$('#ingredients input').forEach(i => i.addEventListener('change', updateCount));
+  updateCount();
+}
+function updateCount(){const n=$$('#ingredients input:checked').length;$('#checked-count').textContent=`${n} of ${ingredientData.length} ingredients checked`;}
+$$('.serving').forEach(btn => btn.addEventListener('click',()=>{servings=Number(btn.dataset.serving);$$('.serving').forEach(b=>{b.classList.toggle('primary',b===btn);b.setAttribute('aria-pressed',String(b===btn));});renderIngredients();}));
+renderIngredients();
+// Space explorer
+const stages = [
+ {label:'Nebula',title:'1. Stellar nursery',detail:'A star begins in a cold cloud of gas and dust. Gravity pulls some of the material together into a denser, hotter protostar.',color:'#8b7cf6',radius:18},
+ {label:'Protostar',title:'2. Protostar',detail:'The young star grows as gas falls inward. Its core heats up, but stable hydrogen fusion has not started yet.',color:'#e5a4ff',radius:24},
+ {label:'Main sequence',title:'3. Main sequence',detail:'When hydrogen fusion begins in the core, outward pressure balances gravity. A Sun-like star spends most of its life in this steady stage.',color:'#ffcc72',radius:29},
+ {label:'Red giant',title:'4. Red giant',detail:'When core hydrogen runs low, the core contracts and the outer layers expand and cool. A Sun-like star later sheds its outer layers.',color:'#ff835d',radius:35},
+ {label:'White dwarf',title:'5. White dwarf',detail:'The exposed core remains as a hot, dense white dwarf, slowly cooling over an extremely long time. Much more massive stars follow a different path and may explode as supernovae.',color:'#d8efff',radius:15}
+];
+let stageIndex=2;
+$('#stars').innerHTML=Array.from({length:45},(_,i)=>`<circle cx="${(i*71+17)%560}" cy="${(i*43+13)%190}" r="${i%3===0?1.4:.7}" fill="#e6ebff" opacity=".65"/>`).join('');
+function renderStage(){
+ const s=stages[stageIndex];$('#star-core').setAttribute('r',s.radius);$('#star-core').setAttribute('fill',s.color);
+ $('#star-halo').setAttribute('r',s.radius*2.3);$('#star-halo').setAttribute('fill',`url(#glow)`);
+ $('#glow stop:first-child').setAttribute('stop-color',s.color);$('#glow stop:last-child').setAttribute('stop-color',s.color);
+ $('#star-label').textContent=s.label;$('#stage-title').textContent=s.title;$('#stage-detail').textContent=s.detail;
+ $('#nebula').hidden=stageIndex!==0;$('#red-ring').hidden=stageIndex!==3;
+ $('#stage-list').innerHTML=stages.map((x,i)=>`<button class="${i===stageIndex?'primary':''}" data-stage="${i}" aria-pressed="${i===stageIndex}">${i+1}. ${x.label}</button>`).join('');
+ $$('#stage-list button').forEach(b=>b.addEventListener('click',()=>{stageIndex=Number(b.dataset.stage);renderStage();}));
+ $('#prev-stage').disabled=stageIndex===0;$('#next-stage').disabled=stageIndex===stages.length-1;
+}
+$('#prev-stage').addEventListener('click',()=>{stageIndex=Math.max(0,stageIndex-1);renderStage();});
+$('#next-stage').addEventListener('click',()=>{stageIndex=Math.min(stages.length-1,stageIndex+1);renderStage();});
+renderStage();
+// Offside teaching demo: 210 is level with the second-last defender line.
+function renderOffside(){
+ const x=Number($('#receiver-position').value);$('#receiver').setAttribute('cx',x);$('#pass-line').setAttribute('d',`M142 85L${x} 112`);$('#receiver-label').setAttribute('x',Math.min(x+10,260));
+ const isOffside=x>210;const level=x===210;
+ $('#offside-title').textContent=isOffside?'Offside position':'Onside';
+ $('#offside-copy').textContent=isOffside?'The receiver is beyond the second-last defender and the ball at the instant of the pass. If they become involved in play, it is an offside offence.':level?'Level with the second-last defender is onside.':'The receiver is level with or behind the second-last defender, so this position is onside.';
+ $('#offside-result').classList.toggle('bad',isOffside);
+}
+$('#receiver-position').addEventListener('input',renderOffside);
+$('#level-button').addEventListener('click',()=>{$('#receiver-position').value=210;renderOffside();});
+renderOffside();
+// Library explorer
+const libraries=[
+ {name:'Trinity College Library',place:'Dublin, Ireland',emoji:'🏛️',facts:['The Long Room holds around 200,000 of its oldest books.','The Book of Kells, an illuminated manuscript from around 800 CE, is displayed here.']},
+ {name:'Bibliothèque Sainte-Geneviève',place:'Paris, France',emoji:'📖',facts:['Its iron structure helped make the reading room feel unusually open for the 1850s.','The names of more than 800 scholars are engraved on its façade.']},
+ {name:'Stuttgart City Library',place:'Stuttgart, Germany',emoji:'📚',facts:['Its central atrium is designed as a bright, cube-shaped space.','The building’s minimal white interior contrasts with a vivid blue night-time façade.']},
+ {name:'George Peabody Library',place:'Baltimore, USA',emoji:'🏛️',facts:['Its soaring atrium rises about 61 feet above the floor.','The library opened in 1878 as part of a cultural institute for the public.']},
+ {name:'Admont Abbey Library',place:'Admont, Austria',emoji:'✨',facts:['It is often described as the world’s largest monastic library hall.','Its ceiling frescoes celebrate the progress of human knowledge.']},
+ {name:'Royal Portuguese Reading Room',place:'Rio de Janeiro, Brazil',emoji:'🌎',facts:['It was founded in 1837 by Portuguese immigrants.','Its collection includes hundreds of thousands of works related to Portuguese culture.']}
+];
+let libraryIndex=0;
+function renderLibrary(){
+ const l=libraries[libraryIndex];$('#library-art').innerHTML=`${l.emoji}<small>LIBRARY EXPLORER</small>`;$('#library-name').textContent=l.name;$('#library-place').textContent=l.place;$('#library-count').textContent=`LIBRARY ${libraryIndex+1} OF ${libraries.length}`;
+ $('#library-facts').innerHTML=l.facts.map((f,i)=>`<div class="fact"><strong>${i+1}.</strong> ${f}</div>`).join('');
+ $('#prev-library').disabled=libraryIndex===0;$('#next-library').disabled=libraryIndex===libraries.length-1;
+}
+$('#prev-library').addEventListener('click',()=>{libraryIndex=Math.max(0,libraryIndex-1);renderLibrary();});
+$('#next-library').addEventListener('click',()=>{libraryIndex=Math.min(libraries.length-1,libraryIndex+1);renderLibrary();});
+renderLibrary();
+})();
+</script>
+</body>
+</html>
